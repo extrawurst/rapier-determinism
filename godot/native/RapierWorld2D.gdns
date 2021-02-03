@@ -1,0 +1,8 @@
+[gd_resource type="NativeScript" load_steps=2 format=2]
+
+[ext_resource path="res://native/logic.gdnlib" type="GDNativeLibrary" id=1]
+
+[resource]
+class_name = "RapierWorld2D"
+script_class_name = "RapierWorld2D"
+library = ExtResource( 1 )
