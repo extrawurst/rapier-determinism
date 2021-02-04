@@ -337,7 +337,7 @@ dependencies = [
 [[package]]
 name = "gdnative-project-utils"
 version = "0.1.3"
-source = "git+https://github.com/extrawurst/project-utils.git?rev=ff98e88#ff98e886c1945da79426c19a85832356ea0369d6"
+source = "git+https://github.com/extrawurst/project-utils.git?rev=c546cb2#c546cb2e8e24fc335cba30e4efd0f532664bd335"
 dependencies = [
  "dunce",
  "ignore",

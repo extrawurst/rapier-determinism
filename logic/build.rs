@@ -7,6 +7,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     // generate files inside the Godot project directory
     Generator::new()
         .godot_project_dir("../godot")
+        .lib_format(LibFormat::Tres)
         .build(classes)?;
 
     Ok(())
