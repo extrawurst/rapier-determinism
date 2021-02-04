@@ -9,7 +9,7 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "",
+"base": "Node2D",
 "class": "RapierWorld2D",
 "language": "NativeScript",
 "path": "res://native/RapierWorld2D.gdns"
@@ -20,7 +20,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Godot-vs-rapier"
+config/name="Rapier-Determinism"
 run/main_scene="res://scenes/start.tscn"
 config/icon="res://icon.png"
 
@@ -40,3 +40,7 @@ click={
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
+
+[rendering]
+
+quality/driver/driver_name="GLES2"

@@ -337,8 +337,7 @@ dependencies = [
 [[package]]
 name = "gdnative-project-utils"
 version = "0.1.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a19af34e6587335876d73932ad6af161451e1aef5d96c814e823876dc5d26ef6"
+source = "git+https://github.com/extrawurst/project-utils.git?rev=ff98e88#ff98e886c1945da79426c19a85832356ea0369d6"
 dependencies = [
  "dunce",
  "ignore",

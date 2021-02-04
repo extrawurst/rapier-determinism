@@ -1,0 +1,17 @@
+[gd_resource type="GDNativeLibrary" format=2]
+
+[resource]
+entry/Android.armeabi-v7a = ""
+entry/Android.arm64-v8a = ""
+entry/Android.x86 = ""
+entry/Android.x86_64 = ""
+entry/X11.64 = ""
+entry/OSX.64 = "../logic/target/release/liblogic.dylib"
+entry/Windows.64 = ""
+entry/iOS.arm64 = "res://liblogic.a"
+dependency/Android.armeabi-v7a = [  ]
+dependency/Android.arm64-v8a = [  ]
+dependency/Android.x86 = [  ]
+dependency/Android.x86_64 = [  ]
+dependency/X11.64 = [  ]
+dependency/OSX.64 = [  ]
