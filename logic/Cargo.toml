@@ -12,8 +12,7 @@ serde_json = "1.0"
 rapier2d = { version = "0.5", features = ["enhanced-determinism","serde-serialize"] }
 
 [build-dependencies]
-gdnative-project-utils = { git="https://github.com/extrawurst/project-utils.git", rev="c546cb2" } 
-# gdnative-project-utils = {version="0.1",path="../../project-utils"}
+gdnative-project-utils = "0.1.4"
 
 [lib]
 crate-type = ["cdylib","staticlib"]
