@@ -1,10 +1,13 @@
 mod rapier_world;
+mod sound;
 mod utils;
 
 use gdnative::prelude::*;
+use sound::run_example;
 
 fn init(handle: InitHandle) {
     godot_print!("gdnative init");
+    run_example();
     handle.add_class::<rapier_world::RapierWorld2D>();
 }
 
