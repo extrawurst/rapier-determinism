@@ -3,7 +3,9 @@ use crc::crc16;
 use gdnative::api::Engine;
 use gdnative::prelude::*;
 use rapier2d::{
-    dynamics::{IntegrationParameters, JointSet, RigidBodyBuilder, RigidBodyHandle, RigidBodySet},
+    dynamics::{
+        CCDSolver, IntegrationParameters, JointSet, RigidBodyBuilder, RigidBodyHandle, RigidBodySet,
+    },
     geometry::{BroadPhase, ColliderBuilder, ColliderSet, NarrowPhase},
     na,
     pipeline::PhysicsPipeline,
@@ -24,6 +26,7 @@ pub struct RapierWorld2D {
     bodies: RefCell<RigidBodySet>,
     colliders: RefCell<ColliderSet>,
     joints: RefCell<JointSet>,
+    ccd: RefCell<CCDSolver>,
     boxes: RefCell<Vec<(RigidBodyHandle, Ref<Node2D>)>>,
 }
 
@@ -41,6 +44,7 @@ impl RapierWorld2D {
             colliders: RefCell::new(ColliderSet::new()),
             joints: RefCell::new(JointSet::new()),
             boxes: RefCell::new(Vec::new()),
+            ccd: RefCell::new(CCDSolver::new()),
         }
     }
 
@@ -88,6 +92,7 @@ impl RapierWorld2D {
             let mut bodies = self.bodies.borrow_mut();
             let mut colliders = self.colliders.borrow_mut();
             let mut joints = self.joints.borrow_mut();
+            let mut ccd = self.ccd.borrow_mut();
 
             let gravity = na::Vector2::new(self.gravity.x, self.gravity.y);
             let mut integration_parameters = IntegrationParameters::default();
@@ -102,6 +107,7 @@ impl RapierWorld2D {
                 &mut bodies,
                 &mut colliders,
                 &mut joints,
+                &mut ccd,
                 &(),
                 &(),
             );
@@ -109,18 +115,18 @@ impl RapierWorld2D {
     }
 
     fn update_hash(&mut self) {
-        // let broad_phase = self.broad_phase.borrow_mut();
-        let narrow_phase = self.narrow_phase.borrow();
-        let bodies = self.bodies.borrow();
-        let colliders = self.colliders.borrow();
-        // let joints = self.joints.borrow();
+        // let broad_phase = self.broad_phase.borrow().clone();
+        let narrow_phase = self.narrow_phase.borrow().clone();
+        let bodies = self.bodies.borrow().clone();
+        let colliders = self.colliders.borrow().clone();
+        let joints = self.joints.borrow().clone();
 
         let mut strings: Vec<String> = Vec::new();
-        strings.push(serde_json::to_string(&*bodies).unwrap());
-        strings.push(serde_json::to_string(&*colliders).unwrap());
-        // strings.push(serde_json::to_string(&*broad_phase).unwrap());
-        strings.push(serde_json::to_string(&*narrow_phase).unwrap());
-        // strings.push(serde_json::to_string(&joints.clone()).unwrap());
+        strings.push(serde_json::to_string(&bodies).unwrap());
+        strings.push(serde_json::to_string(&colliders).unwrap());
+        // strings.push(serde_json::to_string(&broad_phase).unwrap());
+        strings.push(serde_json::to_string(&narrow_phase).unwrap());
+        strings.push(serde_json::to_string(&joints).unwrap());
 
         self.hash = crc16::checksum_x25(strings.join(";").as_bytes());
     }
@@ -146,10 +152,7 @@ impl RapierWorld2D {
         let mut colliders = self.colliders.borrow_mut();
         let mut boxes = self.boxes.borrow_mut();
 
-        let falling_box = RigidBodyBuilder::new_dynamic()
-            .translation(x, y)
-            .mass(0.5)
-            .build();
+        let falling_box = RigidBodyBuilder::new_dynamic().translation(x, y).build();
 
         let falling_box = bodies.insert(falling_box);
         let falling_box_index = boxes.len();
