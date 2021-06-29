@@ -11,3 +11,9 @@ The purpose of this project is to have a demo of rigidbody physics based on [Rap
 # Final State
 
 ![img](result.png)
+
+# Webgl
+
+now also supporting webgl: https://extrawurst.github.io/rapier-determinism/
+
+![img](webgl.png)
