@@ -9,7 +9,7 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "",
+"base": "Node2D",
 "class": "RapierWorld2D",
 "language": "NativeScript",
 "path": "res://native/RapierWorld2D.gdns"
